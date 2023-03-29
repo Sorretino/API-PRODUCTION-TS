@@ -1,0 +1,21 @@
+#ENDPOINT MENU
+GET = http://localhost:3333/menu/
+POST = http://localhost:3333/menu/
+PUT = http://localhost:3333/menu/:ID #falta
+DELETE = http://localhost:3333/menu/:ID  #falta
+
+#ENDPOINT SUB-MENU
+GET = http://localhost:3333/submenu/
+POST = http://localhost:3333/submenu/
+PUT = http://localhost:3333/submenu/:ID
+DELETE = http://localhost:3333/submenu/:ID
+
+#ENDPOINT BLOG
+GET = http://localhost:3333/house/
+POST = http://localhost:3333/house/
+PUT = http://localhost:3333/house/:ID
+DELETE = http://localhost:3333/house/:ID
+PAGINATE-BLOG = http://localhost:3333/housePaginate?skip=1
+
+#ENDPOINT COMPANY
+PAGINATE-COMPANY = http://localhost:3333/companyPaginate?skip=1

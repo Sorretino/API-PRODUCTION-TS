@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  name     String
+  email    String  @unique
+  password String?
+  sector   String
+  image    String?
+
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("Users")
+}
+
+model House {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  title            String
+  description      String
+  description_long String
+  url              String
+  position         String
+  urlimage         String?
+  active           Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("blogs")
+}
+
+model Menu {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  title   String
+  url     String
+  order   String
+  Submenu Submenu[]
+
+  @@map("menus")
+}
+
+model Submenu {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  url         String
+  description String
+  color       String
+  menu        Menu   @relation(fields: [menuId], references: [id])
+  menuId      String
+
+  @@map("submenus")
+}
+
+model Company {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  paragraph   String
+  object      String
+  solution    String
+  urlimage    String?
+  url         String
+  color       String
+  active      Boolean       @default(true)
+  Workgallery Workgallery[]
+
+  @@map("companys")
+}
+
+model Workgallery {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  urlimage  String
+  grid      String
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String
+
+  @@map("workgallerys")
+}
+
+model Subscribed {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String
+  phone     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("subscribed")
+}
+
+model Developers {
+  id          String        @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  email       String
+  phone       String
+  city        String
+  price       String
+  description String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  paymentdevs PaymentDevs[]
+
+  @@map("developers")
+}
+
+model PaymentDevs {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  price        String
+  project      String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  developers   Developers @relation(fields: [developersId], references: [id])
+  developersId String     @db.ObjectId
+
+  @@map("payment")
+}
+
+model Importer {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  phone             String   @unique
+  email             String
+  origin            String
+  status            String
+  config_id         String
+  whitelabel_config String
+  dialog            String[]
+  broker            String
+  send              Boolean  @default(false)
+  start_message     DateTime @default(now())
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("acelera_leads_Roc_Jade_jamanari_44_v2teste")
+}
